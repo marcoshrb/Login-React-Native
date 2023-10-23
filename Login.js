@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { StyleSheet, Text, View, TextInput, TouchableOpacity} from "react-native";
 
-export default function App() {
+export default function Login(props) {
   const [senha, setSenha] = useState("onibus");
 
   return (
@@ -28,9 +28,11 @@ export default function App() {
           <Text>Login</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => props.navigation.navigate("Cadastro")}>
           <Text>Cadastrar</Text>
         </TouchableOpacity>
+        
+        
 
       </View>
 

@@ -1,34 +1,19 @@
-import { useState } from "react"
-import { StyleSheet, Text, View, TextInput } from "react-native";
+
+import {NavigationContainer} from '@react-navigation/native'
+import {createStackNavigator} from '@react-navigation/stack'
+import Login from './Login.js';
+import Cadastro from './Cadastro'
+import Usuarios from './Usuarios'
 
 export default function App() {
-  const [senha, setSenha] = useState("onibus");
-
-
-
+  const Stack = createStackNavigator();
   return (
-    <View style={styles.container}>
-      <Text style={styles.UsuariosTitulo}>
-        Usuarios
-      </Text>
-      <View>
-        
-      </View>
-
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name= "Login" component = {Login}/>
+        <Stack.Screen name= "Cadastro" component={Cadastro}/>
+        <Stack.Screen name= "Usuarios" component={Usuarios}/>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#A9A9A9",
-    alignItems: "center"
-  },
-  UsuariosTitulo: {
-    fontSize: "60px",
-    marginBottom: "60px",
-    marginTop: "50px"
-  },
-  
-});

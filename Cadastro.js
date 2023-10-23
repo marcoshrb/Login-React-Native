@@ -11,7 +11,7 @@ function Container(props) {
 
 
 
-export default function App() {
+export default function Cadastro(props) {
   const [senha, setSenha] = useState("onibus");
   const [inicio, setInicio] = useState(false);
 
@@ -95,6 +95,7 @@ export default function App() {
 
       <TouchableOpacity
         style={styles.touchCadastrar}
+        onPress={() => props.navigation.navigate("Usuarios")}
       >
         <Text>Cadastrar</Text>
       </TouchableOpacity>
