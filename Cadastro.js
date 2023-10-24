@@ -1,5 +1,6 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Switch } from "react-native";
+import { UtilsContext } from "./Context";
 
 function Container(props) {
   return (
@@ -9,11 +10,15 @@ function Container(props) {
   )
 }
 
-
-
 export default function Cadastro(props) {
-  const [senha, setSenha] = useState("onibus");
+  
   const [inicio, setInicio] = useState(false);
+
+  const { utils, setUtils } = useContext(UtilsContext)
+  
+  function goToUsuarios(){
+    props.navigation.navigate('Usuarios');
+  }
 
   function SimNao(props) {
     if (inicio == true) {
@@ -47,6 +52,7 @@ export default function Cadastro(props) {
       <View>
         <Text style={styles.Textteste}>Nome:</Text>
         <TextInput
+          onChangeText={text => setUtils({...utils, nome: text})}
           style={styles.textosInputGrande}
         />
 
@@ -54,24 +60,31 @@ export default function Cadastro(props) {
 
           <View style={styles.Formata}>
             <Text>Idade:</Text>
-            <TextInput style={styles.textosInputPequeno}/>
+            <TextInput 
+            onChangeText={text => setUtils({...utils, idade: text})}
+            style={styles.textosInputPequeno}
+            />
           </View>
 
           <View style={styles.FormataDireita}>
             <Text>Sexo:</Text>
-            <TextInput style={styles.textosInputPequenoDireita} />
+            <TextInput 
+            onChangeText={text => setUtils({...utils, sexo: text})}
+            style={styles.textosInputPequenoDireita} 
+            />
           </View>
           
         </Container>
 
         <Text>Email:</Text>
         <TextInput
+          onChangeText={text => setUtils({...utils, email: text})}
           style={styles.textosInputGrande}
         />
         <Text>Senha:</Text>
         <TextInput
           secureTextEntry={true}
-          onChangeText={e => setSenha(e)}
+          onChangeText={text => setUtils({...utils, senha: text})}
           style={styles.textosInputGrande}
         />
         <Text>Confirmar senha:</Text>
@@ -95,12 +108,14 @@ export default function Cadastro(props) {
 
       <TouchableOpacity
         style={styles.touchCadastrar}
-        onPress={() => props.navigation.navigate("Usuarios")}
+        onPress={() => goToUsuarios()}
       >
         <Text>Cadastrar</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => props.navigation.navigate("Login")}
+      >
         <Text>Cancelar</Text>
       </TouchableOpacity>
 

@@ -1,11 +1,13 @@
-import { useState } from "react"
+import { useState,useContext } from "react"
 import { StyleSheet, Text, View, TextInput } from "react-native";
+import { UtilsContext } from "./Context";
 
 export default function Usuarios(props) {
-  const [senha, setSenha] = useState("onibus");
 
+  const [senha, setSenha] = useState("");
+  const { utils, setUtils } = useContext(UtilsContext)
 
-
+  console.log(utils);
   return (
     <View style={styles.container}>
       <View style={styles.flexDeTudo}>
@@ -13,10 +15,10 @@ export default function Usuarios(props) {
           Usuarios
         </Text>
         <View style={styles.card}>
-          <Text style={styles.textos}>Nome:</Text>
-          <Text style={styles.textos}>Idade:</Text>
-          <Text style={styles.textos}>Sexo:</Text>
-          <Text style={styles.textos}>Recebe Notificação</Text>
+          <Text style={styles.textos}>Nome: {utils.nome}</Text>
+          <Text style={styles.textos}>Idade: {utils.idade}</Text>
+          <Text style={styles.textos}>Sexo: {utils.sexo}</Text>
+          <Text style={styles.textos}>Recebe Notificação: {utils.notificacao}</Text>
         </View>
       </View>
     </View>

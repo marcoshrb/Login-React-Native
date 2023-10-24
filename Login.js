@@ -1,8 +1,13 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { StyleSheet, Text, View, TextInput, TouchableOpacity} from "react-native";
+import { UtilsContext } from "./Context";
+
 
 export default function Login(props) {
-  const [senha, setSenha] = useState("onibus");
+
+  const [senha, setSenha] = useState("");
+
+  
 
   return (
     <View style={styles.container}>
