@@ -33,7 +33,8 @@ export default function Login(props) {
           <Text>Login</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => props.navigation.navigate("Cadastro")}>
+        <TouchableOpacity onPress={() => props.navigation.navigate("Cadastro")}
+         style={styles.touchCancelar}>
           <Text>Cadastrar</Text>
         </TouchableOpacity>
         
@@ -66,9 +67,12 @@ const styles = StyleSheet.create({
     margin: "10px"
   },
   textosInputGrande: {
+    marginTop: "10px",
+    height: "25px",
     marginBottom: "20px",
     backgroundColor: "white",
-    borderRadius: "5%",
+    borderRadius: "10px",
+    padding: "10px",
     width: "300px"
   },
   Botoes: {
@@ -76,5 +80,8 @@ const styles = StyleSheet.create({
     alignItems: "center", 
     justifyContent: "flex-end",
     marginBottom: "40px"
+  },
+  touchCancelar: {
+    marginTop: '10px'
   }
 });

@@ -11,13 +11,20 @@ function Container(props) {
 }
 
 export default function Cadastro(props) {
-  
+
   const [inicio, setInicio] = useState(false);
 
   const { utils, setUtils } = useContext(UtilsContext)
-  
-  function goToUsuarios(){
-    props.navigation.navigate('Usuarios');
+
+  const [confirmaSenha, setConfirmaSenha] = useState("");
+
+  function goToUsuarios() {
+    if (utils.senha == confirmaSenha) {
+      props.navigation.navigate('Usuarios');
+    }
+    else {
+      
+    }
   }
 
   function SimNao(props) {
@@ -50,9 +57,9 @@ export default function Cadastro(props) {
         }}
       />
       <View>
-        <Text style={styles.Textteste}>Nome:</Text>
+        <Text>Nome:</Text>
         <TextInput
-          onChangeText={text => setUtils({...utils, nome: text})}
+          onChangeText={text => setUtils({ ...utils, nome: text })}
           style={styles.textosInputGrande}
         />
 
@@ -60,47 +67,50 @@ export default function Cadastro(props) {
 
           <View style={styles.Formata}>
             <Text>Idade:</Text>
-            <TextInput 
-            onChangeText={text => setUtils({...utils, idade: text})}
-            style={styles.textosInputPequeno}
+            <TextInput
+              onChangeText={text => setUtils({ ...utils, idade: text })}
+              style={styles.textosInputPequeno}
             />
           </View>
 
           <View style={styles.FormataDireita}>
             <Text>Sexo:</Text>
-            <TextInput 
-            onChangeText={text => setUtils({...utils, sexo: text})}
-            style={styles.textosInputPequenoDireita} 
+            <TextInput
+              onChangeText={text => setUtils({ ...utils, sexo: text })}
+              style={styles.textosInputPequenoDireita}
             />
           </View>
-          
+
         </Container>
 
         <Text>Email:</Text>
         <TextInput
-          onChangeText={text => setUtils({...utils, email: text})}
+          onChangeText={text => setUtils({ ...utils, email: text })}
           style={styles.textosInputGrande}
         />
         <Text>Senha:</Text>
         <TextInput
           secureTextEntry={true}
-          onChangeText={text => setUtils({...utils, senha: text})}
+          onChangeText={text => setUtils({ ...utils, senha: text })}
           style={styles.textosInputGrande}
         />
         <Text>Confirmar senha:</Text>
         <TextInput
+          onChangeText={confirmaSenha => setConfirmaSenha(confirmaSenha)}
           secureTextEntry={true}
           style={styles.textosInputGrande}
         />
+
         <Text>Deseja receber notificações?</Text>
 
-        <Container style={styles.InputsPequenos}>
+        <Container style={styles.SwitchPequenos}>
           <Switch
             onValueChange={() => setInicio(!inicio)}
             value={inicio}
             trackColor={{ false: "#767577", true: "#87CEEB" }}
             thumbColor={"#D3D3D3"}
             activeThumbColor={"#f4f3f4"}
+            style={styles.Switch}
           />
           <SimNao />
         </Container>
@@ -115,6 +125,7 @@ export default function Cadastro(props) {
 
       <TouchableOpacity
         onPress={() => props.navigation.navigate("Login")}
+       
       >
         <Text>Cancelar</Text>
       </TouchableOpacity>
@@ -140,19 +151,30 @@ const styles = StyleSheet.create({
     margin: "10px"
   },
   textosInputGrande: {
-    marginBottom: "10px",
+    marginTop: "10px",
+    height: "25px",
+    marginBottom: "20px",
     backgroundColor: "white",
-    borderRadius: "5%",
+    borderRadius: "10px",
+    padding: "10px",
     width: "300px"
   },
   textosInputPequeno: {
+    marginTop: "10px",
+    height: "25px",
+    marginBottom: "20px",
     backgroundColor: "white",
-    borderRadius: "5%",
+    borderRadius: "10px",
+    padding: "10px",
     width: "140px"
   },
-  textosInputPequenoDireita:{
+  textosInputPequenoDireita: {
+    marginTop: "10px",
+    height: "25px",
+    marginBottom: "20px",
     backgroundColor: "white",
-    borderRadius: "5%",
+    borderRadius: "10px",
+    padding: "10px",
     width: "140px"
   },
   InputsPequenos: {
@@ -160,16 +182,26 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "flex-start"
   },
-  Textteste: {
-    alignItems: "flex-start"
-  },
-  Formata:{
+  SwitchPequenos: {
     display: "flex",
-    alignItems: "flex-start"  
+    flexDirection: "row",
+    alignItems: "flex-start",
+    marginTop: "10px",
+    marginBottom: "10px"
+  },
+  Switch: {
+    marginRight: "10px"
+  },
+  Formata: {
+    display: "flex",
+    alignItems: "flex-start"
   },
   FormataDireita: {
     display: "flex",
     alignItems: "flex-start",
-    marginLeft: "20px" 
+    marginLeft: "20px"
+  },
+  touchCancelar: {
+    marginTop: '10px'
   }
 });
