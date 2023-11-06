@@ -1,25 +1,34 @@
-import { useState,useContext } from "react"
+import { useState, useContext } from "react"
 import { StyleSheet, Text, View, TextInput } from "react-native";
 import { UtilsContext } from "./Context";
 
+function CardUsuario(props) {
+
+  for (var i = 0; i < utils.nome.length; i++) {
+    return (
+      <View style={styles.card}>
+        <Text style={styles.textos}>Nome: {utils.nome[i]}</Text>
+        <Text style={styles.textos}>Idade: {utils.idade[i]}</Text>
+        <Text style={styles.textos}>Sexo: {utils.sexo[i]}</Text>
+        <Text style={styles.textos}>Recebe Notificação: {utils.notfy[i] == false ? "Não" : "Sim"}</Text>
+      </View>
+
+    );
+  }
+
+}
+
 export default function Usuarios(props) {
 
-  const [senha, setSenha] = useState("");
-  const { utils, setUtils } = useContext(UtilsContext)
+  const { utils, setUtils } = useContext(UtilsContext);
 
-  console.log(utils);
   return (
     <View style={styles.container}>
       <View style={styles.flexDeTudo}>
         <Text style={styles.UsuariosTitulo}>
           Usuarios
         </Text>
-        <View style={styles.card}>
-          <Text style={styles.textos}>Nome: {utils.nome}</Text>
-          <Text style={styles.textos}>Idade: {utils.idade}</Text>
-          <Text style={styles.textos}>Sexo: {utils.sexo}</Text>
-          <Text style={styles.textos}>Recebe Notificação: {utils.notificacao}</Text>
-        </View>
+        <CardUsuario />
       </View>
     </View>
   );

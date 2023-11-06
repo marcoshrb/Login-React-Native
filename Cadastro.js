@@ -10,40 +10,51 @@ function Container(props) {
   )
 }
 
-export default function Cadastro(props) {
+function SimNao(props) {
+  if (props == true) {
+    return (
+      <View >
+        <Text>Sim</Text>
+      </View>
+    );
+  }
+  else {
+    return (
+      <View>
+        <Text>Não</Text>
+      </View>
+    );
+  }
 
-  const [inicio, setInicio] = useState(false);
+}
+
+export default function Cadastro(props) {
 
   const { utils, setUtils } = useContext(UtilsContext)
 
   const [confirmaSenha, setConfirmaSenha] = useState("");
 
+  const [nome, setNome] = useState("")
+  const [idade, setIdade] = useState("")
+  const [sexo, setSexo] = useState("")
+  const [email, setEmail] = useState("")
+  const [senha, setSenha] = useState("")
+  const [notfy, setNotfy] = useState(false)
+
   function goToUsuarios() {
-    if (utils.senha == confirmaSenha) {
-      props.navigation.navigate('Usuarios');
-    }
-    else {
+    if (utils.nome && utils.idade && utils.sexo && utils.email && utils.senha) {
+      setUtils({ ...utils, nome: [...utils.nome, nome], idade: [...utils.idade, idade], sexo: [...utils.sexo, sexo], email: [...utils.email, email], senha: [...utils.senha, senha], notfy: [...utils.notfy, notfy] })
       
     }
-  }
-
-  function SimNao(props) {
-    if (inicio == true) {
-
-      return (
-        <View >
-          <Text>Sim</Text>
-        </View>
-      );
-    }
+    
     else {
-      return (
-        <View>
-          <Text>Não</Text>
-        </View>
-      );
+      setUtils({ ...utils, nome: [nome], idade: [idade], sexo: [sexo], email: [email], senha: [senha], notfy: [notfy] })
+      
     }
-
+    
+   
+    props.navigation.navigate('Usuarios');
+    
   }
 
   return (
@@ -59,7 +70,7 @@ export default function Cadastro(props) {
       <View>
         <Text>Nome:</Text>
         <TextInput
-          onChangeText={text => setUtils({ ...utils, nome: text })}
+          onChangeText = {text => setNome(text)}
           style={styles.textosInputGrande}
         />
 
@@ -68,7 +79,7 @@ export default function Cadastro(props) {
           <View style={styles.Formata}>
             <Text>Idade:</Text>
             <TextInput
-              onChangeText={text => setUtils({ ...utils, idade: text })}
+              onChangeText = {text => setIdade(text)}
               style={styles.textosInputPequeno}
             />
           </View>
@@ -76,7 +87,7 @@ export default function Cadastro(props) {
           <View style={styles.FormataDireita}>
             <Text>Sexo:</Text>
             <TextInput
-              onChangeText={text => setUtils({ ...utils, sexo: text })}
+              onChangeText = {text => setSexo(text)}
               style={styles.textosInputPequenoDireita}
             />
           </View>
@@ -85,13 +96,13 @@ export default function Cadastro(props) {
 
         <Text>Email:</Text>
         <TextInput
-          onChangeText={text => setUtils({ ...utils, email: text })}
+          onChangeText = {text => setEmail(text)}
           style={styles.textosInputGrande}
         />
         <Text>Senha:</Text>
         <TextInput
           secureTextEntry={true}
-          onChangeText={text => setUtils({ ...utils, senha: text })}
+          onChangeText = {text => setSenha(text)}
           style={styles.textosInputGrande}
         />
         <Text>Confirmar senha:</Text>
@@ -105,14 +116,14 @@ export default function Cadastro(props) {
 
         <Container style={styles.SwitchPequenos}>
           <Switch
-            onValueChange={() => setInicio(!inicio)}
-            value={inicio}
+            onValueChange={() => setNotfy(!notfy)}
+            value={notfy}
             trackColor={{ false: "#767577", true: "#87CEEB" }}
             thumbColor={"#D3D3D3"}
             activeThumbColor={"#f4f3f4"}
             style={styles.Switch}
           />
-          <SimNao />
+          {SimNao(notfy)}
         </Container>
       </View>
 
@@ -125,7 +136,7 @@ export default function Cadastro(props) {
 
       <TouchableOpacity
         onPress={() => props.navigation.navigate("Login")}
-       
+
       >
         <Text>Cancelar</Text>
       </TouchableOpacity>
