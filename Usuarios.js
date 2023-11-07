@@ -3,35 +3,34 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity } from "react-nativ
 import { UtilsContext } from "./Context";
 
 function CardUsuario(props) {
-  const { utils, setUtils } = useContext(UtilsContext);
+  const { utils, setUtils } = useContext(UtilsContext); 
+  
+  function deletarUser() {
 
-  function DeletarUser(i) {
-    utils.nome.splice(i, 1)
-    utils.idade.splice(i, 1)
-    utils.sexo.splice(i, 1)
-    utils.email.splice(i, 1)
-    utils.senha.splice(i, 1)
-    utils.notfy.splice(i, 1)
-
+    console.log("AAA",utils.users.filter(item => item.nome !== ""))
+  
+    setUtils({ ...utils ,  users: utils.users.filter(item => item.nome !== props.users.nome)})
+    
   }
 
-  for (var i = 0; i < utils.users.length; i++) {
     return (
       <View style={styles.card}>
-        <Text style={styles.textos}>Nome: {utils.users[i].nome}</Text>
-        <Text style={styles.textos}>Idade: {utils.users[i].idade}</Text>
-        <Text style={styles.textos}>Sexo: {utils.users[i].sexo}</Text>
-        <Text style={styles.textos}>Recebe Notificação: {utils.users[i].notfy == false ? "Não" : "Sim"}</Text>
-        <TouchableOpacity onPress={() => DeletarUser(i)}
+        <Text style={styles.textos}>Nome: {props.users.nome}</Text>
+        <Text style={styles.textos}>Idade: {props.users.idade}</Text>
+        <Text style={styles.textos}>Sexo: {props.users.sexo}</Text>
+        <Text style={styles.textos}>Recebe Notificação: {props.users.notfy == false ? "Não" : "Sim"}</Text>
+        <TouchableOpacity onPress={() => deletarUser()}
           style={styles.touchDeletar}>
           <Text>Deletar</Text>
         </TouchableOpacity>
       </View>
 
     );
-  }
+  
 
 }
+
+
 
 
 export default function Usuarios(props) {
@@ -44,7 +43,7 @@ export default function Usuarios(props) {
         <Text style={styles.UsuariosTitulo}>
           Usuarios
         </Text>
-        <CardUsuario />
+        {utils.users.map((users, index) => <CardUsuario key = {index} users = {users}/>)}
       </View>
     </View>
   );
@@ -62,10 +61,10 @@ const styles = StyleSheet.create({
   },
   UsuariosTitulo: {
     fontSize: "80px",
-    marginBottom: "20px",
     marginTop: "50px"
   },
   card: {
+    marginTop: "20px",
     width: '500px',
     maxHeight: '180px',
     borderRadius: '3%',

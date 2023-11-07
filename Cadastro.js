@@ -42,7 +42,7 @@ export default function Cadastro(props) {
   const [notfy, setNotfy] = useState(false)
 
   function goToUsuarios() {
-    setUtils({ ...utils, users: [...utils.users, { nome, idade, sexo, email, senha, notfy }] })
+    setUtils({ ...utils, users: [...utils.users, { nome : nome, idade : idade, sexo : sexo, email : email, senha : senha, notfy : notfy}] })
 
     props.navigation.navigate('Usuarios');
 
