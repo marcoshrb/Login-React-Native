@@ -42,19 +42,10 @@ export default function Cadastro(props) {
   const [notfy, setNotfy] = useState(false)
 
   function goToUsuarios() {
-    if (utils.nome && utils.idade && utils.sexo && utils.email && utils.senha) {
-      setUtils({ ...utils, nome: [...utils.nome, nome], idade: [...utils.idade, idade], sexo: [...utils.sexo, sexo], email: [...utils.email, email], senha: [...utils.senha, senha], notfy: [...utils.notfy, notfy] })
-      
-    }
-    
-    else {
-      setUtils({ ...utils, nome: [nome], idade: [idade], sexo: [sexo], email: [email], senha: [senha], notfy: [notfy] })
-      
-    }
-    
-   
+    setUtils({ ...utils, users: [...utils.users, { nome, idade, sexo, email, senha, notfy }] })
+
     props.navigation.navigate('Usuarios');
-    
+
   }
 
   return (
@@ -70,7 +61,7 @@ export default function Cadastro(props) {
       <View>
         <Text>Nome:</Text>
         <TextInput
-          onChangeText = {text => setNome(text)}
+          onChangeText={text => setNome(text)}
           style={styles.textosInputGrande}
         />
 
@@ -79,7 +70,7 @@ export default function Cadastro(props) {
           <View style={styles.Formata}>
             <Text>Idade:</Text>
             <TextInput
-              onChangeText = {text => setIdade(text)}
+              onChangeText={text => setIdade(text)}
               style={styles.textosInputPequeno}
             />
           </View>
@@ -87,7 +78,7 @@ export default function Cadastro(props) {
           <View style={styles.FormataDireita}>
             <Text>Sexo:</Text>
             <TextInput
-              onChangeText = {text => setSexo(text)}
+              onChangeText={text => setSexo(text)}
               style={styles.textosInputPequenoDireita}
             />
           </View>
@@ -96,13 +87,13 @@ export default function Cadastro(props) {
 
         <Text>Email:</Text>
         <TextInput
-          onChangeText = {text => setEmail(text)}
+          onChangeText={text => setEmail(text)}
           style={styles.textosInputGrande}
         />
         <Text>Senha:</Text>
         <TextInput
           secureTextEntry={true}
-          onChangeText = {text => setSenha(text)}
+          onChangeText={text => setSenha(text)}
           style={styles.textosInputGrande}
         />
         <Text>Confirmar senha:</Text>

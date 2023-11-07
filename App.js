@@ -8,7 +8,7 @@ import Usuarios from './Usuarios'
 import { useState } from 'react';
 
 export default function App() {
-  const [utils, setUtils] = useState({})
+  const [utils, setUtils] = useState({users:[]})
   const Stack = createStackNavigator();
   return (
     <NavigationContainer>

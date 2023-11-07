@@ -1,22 +1,38 @@
 import { useState, useContext } from "react"
-import { StyleSheet, Text, View, TextInput } from "react-native";
+import { StyleSheet, Text, View, TextInput, TouchableOpacity } from "react-native";
 import { UtilsContext } from "./Context";
 
 function CardUsuario(props) {
+  const { utils, setUtils } = useContext(UtilsContext);
 
-  for (var i = 0; i < utils.nome.length; i++) {
+  function DeletarUser(i) {
+    utils.nome.splice(i, 1)
+    utils.idade.splice(i, 1)
+    utils.sexo.splice(i, 1)
+    utils.email.splice(i, 1)
+    utils.senha.splice(i, 1)
+    utils.notfy.splice(i, 1)
+
+  }
+
+  for (var i = 0; i < utils.users.length; i++) {
     return (
       <View style={styles.card}>
-        <Text style={styles.textos}>Nome: {utils.nome[i]}</Text>
-        <Text style={styles.textos}>Idade: {utils.idade[i]}</Text>
-        <Text style={styles.textos}>Sexo: {utils.sexo[i]}</Text>
-        <Text style={styles.textos}>Recebe Notificação: {utils.notfy[i] == false ? "Não" : "Sim"}</Text>
+        <Text style={styles.textos}>Nome: {utils.users[i].nome}</Text>
+        <Text style={styles.textos}>Idade: {utils.users[i].idade}</Text>
+        <Text style={styles.textos}>Sexo: {utils.users[i].sexo}</Text>
+        <Text style={styles.textos}>Recebe Notificação: {utils.users[i].notfy == false ? "Não" : "Sim"}</Text>
+        <TouchableOpacity onPress={() => DeletarUser(i)}
+          style={styles.touchDeletar}>
+          <Text>Deletar</Text>
+        </TouchableOpacity>
       </View>
 
     );
   }
 
 }
+
 
 export default function Usuarios(props) {
 
@@ -51,7 +67,7 @@ const styles = StyleSheet.create({
   },
   card: {
     width: '500px',
-    maxHeight: '150px',
+    maxHeight: '180px',
     borderRadius: '3%',
     borderWidth: '2px',
     borderColor: 'black',
@@ -63,6 +79,16 @@ const styles = StyleSheet.create({
     marginLeft: '30px',
     marginTop: '10px',
     fontWeight: 'bold'
+  },
+  touchDeletar: {
+    width: "200px",
+    backgroundColor: "red",
+    color: "black",
+    padding: "10px",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: "10px",
+    margin: "10px"
   }
 
 });

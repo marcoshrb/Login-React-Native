@@ -38,8 +38,11 @@ export default function Login(props) {
           <Text>Cadastrar</Text>
         </TouchableOpacity>
         
+        <TouchableOpacity onPress={() => props.navigation.navigate('Usuarios')}
+         style={styles.touchUsuarios}>
+          <Text>Usuarios</Text>
+        </TouchableOpacity>
         
-
       </View>
 
     </View>
@@ -82,6 +85,9 @@ const styles = StyleSheet.create({
     marginBottom: "40px"
   },
   touchCancelar: {
-    marginTop: '10px'
+    marginTop: '20px'
+  },
+  touchUsuarios: {
+    marginTop: "20px"
   }
 });
