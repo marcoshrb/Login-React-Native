@@ -85,9 +85,9 @@ const styles = StyleSheet.create({
     marginBottom: "40px"
   },
   touchCancelar: {
-    marginTop: '20px'
+    marginTop: '15px'
   },
   touchUsuarios: {
-    marginTop: "20px"
+    marginTop: "15px"
   }
 });

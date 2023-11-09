@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState, useContext } from "react"
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Switch } from "react-native";
 import { UtilsContext } from "./Context";
@@ -26,6 +27,17 @@ function SimNao(props) {
     );
   }
 
+}
+
+const conexacaoHost = async (name, age) => {
+
+  try {
+    const response = await axios.post("http://localhost:8080/user", { name, age});
+    console.log('Resposta da API: ', response);
+  } catch (error) {
+    console.error('Erro ao enviar', error)
+  }
+  
 }
 
 export default function Cadastro(props) {
@@ -130,6 +142,13 @@ export default function Cadastro(props) {
 
       >
         <Text>Cancelar</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.touchCadastrar}
+        onPress={() => conexacaoHost(nome, idade)}
+      >
+         <Text>Teste</Text>
       </TouchableOpacity>
 
     </View>
